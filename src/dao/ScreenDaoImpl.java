@@ -26,7 +26,6 @@ private static ScreenDaoImpl instance;
  	 * @author 정대석
  	 * @brief 상영관 이름 값을 비교하여 존재여부를 파악. 없을경우 null을 리턴. 있으면 해당 상영관 값을 리턴
  	 */
-
 	@Override
 	public ScreenVO getScreenName(String key, String ScreenName) {
 		for (int i = 0; i < database.screenlist.size(); i++) {
@@ -37,7 +36,6 @@ private static ScreenDaoImpl instance;
 				}
 			} 
 		}
-		System.out.println();
 		return null;
 
 	}

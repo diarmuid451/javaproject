@@ -1,4 +1,4 @@
-package Service;
+package service;
 
 import java.util.Scanner;
 
@@ -18,7 +18,9 @@ public class ScreenServiceImpl implements ScreenService {
 		}
 		return instance;
 	}
-	
+	public static void main(String[] args) {
+		new ScreenServiceImpl().getScreenInfo();
+	}
 
 	/**
  	 * @author 정대석

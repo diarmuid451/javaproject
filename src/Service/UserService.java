@@ -1,7 +1,10 @@
-package Service;
+package service;
 
 public interface UserService {
 
-	void getUserInfo();
+	void join();
+
+	void login();
+
 
 }
