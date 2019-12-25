@@ -12,6 +12,8 @@ import service.ScreenService;
 import service.ScreenServiceImpl;
 import service.UserService;
 import service.UserServiceImpl;
+import service.payService;
+import service.payServiceImpl;
 import data.Session;
 
 public class RootController {
@@ -31,6 +33,7 @@ public class RootController {
 	MovieService movieService = MovieServiceImpl.getInstance();
 	ScreenService screenService = ScreenServiceImpl.getInstance();
 	MovieScheduleService movieSchService = MovieScheduleServiceImpl.getInstance();
+	payService payService = payServiceImpl.getInstance();
 	public static void main(String[] args) {
 		// 회원정보 확인 ->  영화 선택 -> 시간 선택 -> 좌석 선택 -> 결제창 -> 영수증 출력
 		RootController control = new RootController();
@@ -94,10 +97,14 @@ public class RootController {
 		System.out.println("영화 시간을 선택해주세요.");
 		String selectMoiveTime = scan.nextLine();
 		System.out.println(selectMoiveTime);
-		
+		payWayInfo();
 		
 	}
-
+	
+	private void payWayInfo() {
+		payService.payWayInfo();
+		
+	}
 }
 
 

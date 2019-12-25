@@ -1,7 +1,5 @@
 package service;
 
-import java.util.Scanner;
-
 import dao.MovieScheduleDao;
 import dao.MovieScheduleDaoImpl;
 

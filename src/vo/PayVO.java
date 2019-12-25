@@ -6,7 +6,10 @@ public class PayVO {
 	private int payId;		// 결제 아이디
 	private String payWay;	// 결제 수단
 	private Date payDate;	// 결제 일자
-	private String payInfo;	// 결제 정보
+	private String payInfo;	// 결제 정보  (이해를 못해서 손대지 못함)
+	private double payPoint; // 결제 적립 포인트 @정대석   @결제수단에 따른 포인트 적립률 저장
+//	private double levelPoint; //등급 적립 포인트 @정대석 @회원등급에 따른 포인트 적립률 저장 
+	
 	
 	//외래키
 	private String userId;		// 회원 아이디
@@ -47,6 +50,12 @@ public class PayVO {
 	}
 	public void setmScheduleId(int mScheduleId) {
 		this.mScheduleId = mScheduleId;
+	}
+	public double getPayPoint() {
+		return payPoint;
+	}
+	public void setPayPoint(double payPoint) {
+		this.payPoint = payPoint;
 	}
 
 }

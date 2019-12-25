@@ -2,7 +2,7 @@ package dao;
 
 import data.Database;
 import vo.ScreenVO;
-import vo.UserVO;
+
 
 public class ScreenDaoImpl implements ScreenDao {
 
@@ -20,7 +20,7 @@ private static ScreenDaoImpl instance;
  	 * @author 정대석
  	 * @brief Database을 호출하여 데이터 베이스 안에 있는 각종 값들을 조회 및 반환 하기 위해서 선언한다.
  	 */
-	Database database = Database.getInstance();
+	Database screenInfo = Database.getInstance();
 	
 	/**
  	 * @author 정대석
@@ -28,8 +28,8 @@ private static ScreenDaoImpl instance;
  	 */
 	@Override
 	public ScreenVO getScreenName(String key, String ScreenName) {
-		for (int i = 0; i < database.screenlist.size(); i++) {
-			ScreenVO screen = database.screenlist.get(i);
+		for (int i = 0; i < screenInfo.screenlist.size(); i++) {
+			ScreenVO screen = screenInfo.screenlist.get(i);
 			if (key.equals("상영관")) {
 				if (screen.getScreenName().equals(ScreenName)) {
 					return screen;
