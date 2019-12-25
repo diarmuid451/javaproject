@@ -12,4 +12,5 @@ public interface payDao {
 	
 	ArrayList<PayVO> payWayAll();
 	
+	void selectMoiveScheduleInfo (int selectMoiveTime);	//선택한 상영 시간표를 부르는 메서드
 }

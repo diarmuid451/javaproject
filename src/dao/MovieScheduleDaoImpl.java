@@ -29,10 +29,12 @@ public class MovieScheduleDaoImpl implements MovieScheduleDao {
 			}
 			for (int i = 0; i < database.mSchlist.size(); i++) {
 				if (database.mSchlist.get(i).getMovieId() == movieNo) {
-					System.out.println("제 " + database.mSchlist.get(i).getScreenId()+" 상영관 \t" + database.mSchlist.get(i).getmScheduleTime());					
+					System.out.println(database.mSchlist.get(i).getmScheduleId() +".제 " + database.mSchlist.get(i).getScreenId()+" 상영관 \t" + database.mSchlist.get(i).getmScheduleTime());					
 				}
 			}		
 		
 	}
+
+	
 	
 }

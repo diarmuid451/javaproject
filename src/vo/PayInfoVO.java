@@ -1,6 +1,6 @@
 package vo;
 
-public class PayInfoVO {
+public class PayInfoVO {	//고민해봤을때 payInfo 테이블은 있어야할 이유가 없어보임. 동일인이 다른 상영관의 영화를 예매한다면 영수증이 따로 나오기 떄문에 영수증 ID가 중복값이 나올 수 가 없음
 	int payInfoId;	// 결제 정보 아이디
 	
 	// 외래키

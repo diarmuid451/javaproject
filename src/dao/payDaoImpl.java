@@ -24,7 +24,20 @@ private static payDaoImpl instance;
 	
 	@Override
 	public void getPay() {
-			
+	
+		
+	}
+	
+	@Override
+	public void selectMoiveScheduleInfo(int selectMoiveTime) {
+		System.out.println(selectMoiveTime);
+		for (int i = 0; i< payment.mSchlist.size(); i++) {
+			if(payment.mSchlist.get(i).getmScheduleId() == selectMoiveTime) {
+				System.out.println("제 " + payment.mSchlist.get(i).getScreenId()+" 상영관 \t" + payment.mSchlist.get(i).getmScheduleTime()); //선택한 상영 시간표가 제대로 입력이 되는지 확인하는 작업
+			}
+		}
+		
+		
 	}
 	
 	@Override

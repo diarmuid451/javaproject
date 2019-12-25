@@ -37,6 +37,7 @@ public class RootController {
 	public static void main(String[] args) {
 		// 회원정보 확인 ->  영화 선택 -> 시간 선택 -> 좌석 선택 -> 결제창 -> 영수증 출력
 		RootController control = new RootController();
+		
 		control.start();			// 1. 첫시작 로그인화면
 		// 2. 영화 선택 페이지 보여주기
 		// 3. 영화의 시간을 선택한다.
@@ -53,6 +54,7 @@ public class RootController {
 			if (Session.loginUser == null){
 				System.out.println("1.로그인 \t 2. 회원가입 \t ");
 			} else if (Session.loginUser != null) {
+				
 				movieInfo(); //  2. 영화 선택 페이지 보여주기
 				break;
 			} else if (Session.loginUser.getUserLevel() >= 90) {
@@ -93,16 +95,27 @@ public class RootController {
 	private void getMovieSchedule(int movieNo) {
 		movieSchService.getMovieSchedule(movieNo);
 		
+		System.out.println("원하시는 영화 시간을 선택해주세요.");
 		Scanner scan = new Scanner(System.in);
-		System.out.println("영화 시간을 선택해주세요.");
-		String selectMoiveTime = scan.nextLine();
-		System.out.println(selectMoiveTime);
+		int selectMoiveTime = Integer.parseInt(scan.nextLine());
+		payService.SelectmSchedule(selectMoiveTime);	//@정대석, @선택한 상영 시간표 id를 결제서비스에 넣어주기 위한 장치
+//		pay();
 		payWayInfo();
 		
 	}
 	
-	private void payWayInfo() {
+	private void pay() {	//정대석, 결제 내용 출력(결제 ID, 결제 날짜, 로그인한 유저 ID)
+		payService.pay();
+		
+	}
+	
+	
+	private void payWayInfo() { //정대석, 결제 방식 결정(먼저 결제 방식을 모두 보여준 다음 결제 방식을 선택하게 유도)
+		System.out.println("결제 수단을 선택해 주세요.");
 		payService.payWayInfo();
+		//결제정보를 호출하는 메서드로 넘어가도록 한다.
+		
+			
 		
 	}
 }

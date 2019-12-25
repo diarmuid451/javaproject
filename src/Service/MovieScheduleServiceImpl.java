@@ -26,6 +26,6 @@ public class MovieScheduleServiceImpl implements MovieScheduleService {
 		movieSchDao.getMoiveScheduleInfo(movieNo);
 		
 		
-	}
-
+	}	
+	
 }

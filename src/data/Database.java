@@ -313,14 +313,14 @@ public class Database {
 		MovieScheduleVO msd14 = new MovieScheduleVO();
 		msd14.setmScheduleId(14);
 		msd14.setmScheduleTime("18:00");
-		msd14.setMovieId(1);
+		msd14.setMovieId(4);
 		msd14.setScreenId(3);
 		mSchlist.add(msd14);
 		
 		MovieScheduleVO msd15 = new MovieScheduleVO();
 		msd15.setmScheduleId(15);
 		msd15.setmScheduleTime("21:00");
-		msd15.setMovieId(4);
+		msd15.setMovieId(1);
 		msd15.setScreenId(3);
 		mSchlist.add(msd15);
 		
