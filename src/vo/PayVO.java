@@ -5,14 +5,14 @@ import java.util.Date;
 public class PayVO {
 	private int payId;		// 결제 아이디
 	private String payWay;	// 결제 수단
-	private String payDate;	// 결제 일자
-	private String payInfo;	// 결제 정보  (이해를 못해서 손대지 못함)
-	private double payPoint; // 결제 적립 포인트 @정대석   @결제수단에 따른 포인트 적립률 저장
-//	private int price; //결제 금액은 어디로?
-	
+	private Date payDate;	// 결제 일자
+	private String payInfo;	// 결제 내용 
+	private int payAdultCnt; // 결제 어른 갯수
+	private int payYoungCnt; // 결제 청소년 갯수
+	private int payChildCnt; // 결제 어린이 갯수
 	
 	//외래키
-	private String userId;		// 로그인 한회원 아이디
+	private String userId;		// 회원 아이디
 	private int mScheduleId;	// 영화 시간 아이디
 	
 	public int getPayId() {
@@ -27,17 +27,35 @@ public class PayVO {
 	public void setPayWay(String payWay) {
 		this.payWay = payWay;
 	}
-	public String getPayDate() {
+	public Date getPayDate() {
 		return payDate;
 	}
-	public void setPayDate(String string) {
-		this.payDate = string;
+	public void setPayDate(Date payDate) {
+		this.payDate = payDate;
 	}
 	public String getPayInfo() {
 		return payInfo;
 	}
 	public void setPayInfo(String payInfo) {
 		this.payInfo = payInfo;
+	}
+	public int getPayAdultCnt() {
+		return payAdultCnt;
+	}
+	public void setPayAdultCnt(int payAdultCnt) {
+		this.payAdultCnt = payAdultCnt;
+	}
+	public int getPayYoungCnt() {
+		return payYoungCnt;
+	}
+	public void setPayYoungCnt(int payYoungCnt) {
+		this.payYoungCnt = payYoungCnt;
+	}
+	public int getPayChildCnt() {
+		return payChildCnt;
+	}
+	public void setPayChildCnt(int payChildCnt) {
+		this.payChildCnt = payChildCnt;
 	}
 	public String getUserId() {
 		return userId;
@@ -51,12 +69,5 @@ public class PayVO {
 	public void setmScheduleId(int mScheduleId) {
 		this.mScheduleId = mScheduleId;
 	}
-	public double getPayPoint() {
-		return payPoint;
-	}
-	public void setPayPoint(double payPoint) {
-		this.payPoint = payPoint;
-	}
-	
 
 }

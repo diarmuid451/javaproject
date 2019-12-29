@@ -9,6 +9,7 @@ import vo.MovieInfoVO;
 import vo.MovieScheduleVO;
 import vo.PayVO;
 import vo.ScreenVO;
+import vo.SeatVO;
 import vo.UserVO;
 
 public class Database {
@@ -23,7 +24,7 @@ public class Database {
 		}
 		return instance;
 	}
-	
+	Date today = new Date();
 	/**
  	 * @author 김령환
  	 * @brief String타입을 Date형으로 넣기위한 형변환. 및 2차원 배열을 통한 DB화 및 초기화 블럭을 통한 초기 관리자 설정
@@ -39,12 +40,18 @@ public class Database {
 		user.setUserPhone("010-1234-5678");
 		user.setUserLevel(90);			//90이상은 관리자
 		user.setUserPoint(1000);
-		try {
-			user.setUserDate(dateform.parse("2019-01-20"));
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		user.setUserDate(today);
 		userlist.add(user);
+		
+		UserVO user2 = new UserVO();
+		user2.setUserId("1");
+		user2.setUserPw("1");
+		user2.setUserName("user1");
+		user2.setUserPhone("010-1234-5678");
+		user2.setUserLevel(0);			//90이상은 관리자
+		user2.setUserPoint(1000);
+		user2.setUserDate(today);
+		userlist.add(user2);
 	} // userList END
 	
 	/**
@@ -213,7 +220,7 @@ public class Database {
 	}
 	
 	/**
- 	 * @author 김령환
+ 	 * @author 구한나
  	 * @brief 
  	 */
 	public ArrayList<MovieScheduleVO> mSchlist = new ArrayList<>();
@@ -229,14 +236,14 @@ public class Database {
 		MovieScheduleVO msd2 = new MovieScheduleVO();
 		msd2.setmScheduleId(2);
 		msd2.setmScheduleTime("12:00");
-		msd2.setMovieId(2);
+		msd2.setMovieId(1);
 		msd2.setScreenId(1);
 		mSchlist.add(msd2);
 		
 		MovieScheduleVO msd3 = new MovieScheduleVO();
 		msd3.setmScheduleId(3);
 		msd3.setmScheduleTime("15:00");
-		msd3.setMovieId(3);
+		msd3.setMovieId(1);
 		msd3.setScreenId(1);
 		mSchlist.add(msd3);
 		
@@ -323,39 +330,71 @@ public class Database {
 		msd15.setMovieId(1);
 		msd15.setScreenId(3);
 		mSchlist.add(msd15);
+	}
+
+	public ArrayList<PayVO> payList = new ArrayList<>();
+	
+	{	
+		PayVO pay = new PayVO();
+		pay.setPayId(0);
+		pay.setPayWay("현금");
+		pay.setPayDate(today);
+		pay.setPayInfo("구매");
+		pay.setmScheduleId(1);
+		pay.setUserId("admin");
+		payList.add(pay);
+	}
+	
+	public ArrayList<SeatVO> seatlist = new ArrayList<>();
+	{
+		int num = 0;
+		int col = 0;
+		int row = 0;
 		
+		for(int i = 1; i <= screenlist.size(); i++) {
+			if(i == 1) {
+				col = 7;
+				row = 5;
+				
+			} else if (i == 2) {
+				col = 8;
+				row = 6;
+			} else if (i == 3){
+				col = 9;
+				row = 7;
+			}
+			char RN = 'A';
+			int price = 8000;
+			int level = 1;
+			for(int j = 0; j < row; j ++) {
+				
+				for(int k = 1; k <= col; k++) {
+					SeatVO seat = new SeatVO();
+					num++;
+					seat.setSeatid(num);
+					seat.setScreenId(i);
+					seat.setSeatNum(k);
+					seat.setNumCnt(col);
+					seat.setBlankSeat(0);
+					seat.setSeatLevel(level);
+					seat.setSeatPrice(price);
+					seat.setSeatRownumber(RN);
+					if(k == col) {
+						RN = (char)(RN+1);
+					}
+					if(RN == 'C') {
+						price = 9500;
+						level = 2;
+					} else if(RN == 'E') {
+						price = 11000;
+						level = 3;
+					}
+					
+					seatlist.add(seat);
+				}
+			}
 		}
-	
-	
-	public ArrayList<PayVO> paylist = new ArrayList<>();
-	{	/*
-		*	@정대석
-		*	@결제 방식과 그에 따르는 결제 적립률을 db에 저장
-		*	
-		*
-		*	payId는 결제 할때마다 순차적으로 생성하는것이 합리적이라 판단
-		*	결제 일자의 경우 일단은 그날 일자로 저장하도록 해두었지만
-		*/
-		PayVO pay1 = new PayVO();
-		pay1.setPayWay("삼성페이");
-		pay1.setPayPoint(0.05);
-		paylist.add(pay1);
-		
-		PayVO pay2 = new PayVO();
-		pay2.setPayWay("카카오페이");
-		pay2.setPayPoint(0.07);
-		paylist.add(pay2);
-		
-		PayVO pay3 = new PayVO();
-		pay3.setPayWay("현금");
-		pay3.setPayPoint(0.10);
-		paylist.add(pay3);
-		
-		PayVO pay4 = new PayVO();
-		pay4.setPayWay("신용카드");
-		pay4.setPayPoint(0.03);
-		paylist.add(pay4);
-		
-		
-	}	
+	}
+
 }
+	

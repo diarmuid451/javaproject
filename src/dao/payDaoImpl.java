@@ -1,15 +1,16 @@
 package dao;
 
-import java.util.ArrayList;
+import java.util.Date;
+import java.util.Map;
+import java.util.Set;
 
-
-import data.Database;
 import vo.PayVO;
-
+import data.Database;
+import data.Session;
 
 public class payDaoImpl implements payDao {
-	
-private static payDaoImpl instance;
+
+	private static payDaoImpl instance;
 	
 	private payDaoImpl(){}
 	
@@ -19,54 +20,32 @@ private static payDaoImpl instance;
 		}
 		return instance;
 	}
-	Database payment = Database.getInstance();
 	
-	
+	Database database = Database.getInstance();
+	Date today = new Date();
+	int paycnt = 1;
+
 	@Override
-	public void getPay() {
-	
+	public void setPayInfo(Map<String, Object> param) {
+		System.out.println(param.keySet());
+		this.paycnt++;
+		PayVO pay = new  PayVO();
+		
+		pay.setPayId(paycnt);
+		pay.setPayWay(String.valueOf(param.get("결제방법")));
+		pay.setPayDate(today);
+		pay.setPayInfo("구매");
+		pay.setPayAdultCnt(Integer.parseInt(String.valueOf(param.get("영화어른수"))));
+		pay.setPayYoungCnt(Integer.parseInt(String.valueOf(param.get("영화청소년수"))));
+		pay.setPayChildCnt(Integer.parseInt(String.valueOf(param.get("영화어린이수"))));
+		
+		// 외래키
+		pay.setmScheduleId(Integer.parseInt(String.valueOf(param.get("영화 상영시간 아이디"))));
+		pay.setUserId(Session.loginUser.getUserId());
+		
+		database.payList.add(pay);
 		
 	}
 	
-	@Override
-	public void selectMoiveScheduleInfo(int selectMoiveTime) {
-		System.out.println(selectMoiveTime);
-		for (int i = 0; i< payment.mSchlist.size(); i++) {
-			if(payment.mSchlist.get(i).getmScheduleId() == selectMoiveTime) {
-				System.out.println("제 " + payment.mSchlist.get(i).getScreenId()+" 상영관 \t" + payment.mSchlist.get(i).getmScheduleTime()); //선택한 상영 시간표가 제대로 입력이 되는지 확인하는 작업
-			}
-		}
-		
-		
-	}
 	
-	@Override
-	public String getPayment(String key, String payWay) {
-		
-		for (int i = 0; i < payment.paylist.size(); i++) {
-			String payMent = payment.paylist.get(i).getPayWay();
-			if (key.equals("결제수단")) {
-				if (payMent.equals(payWay)) {
-					return payMent;
-				}
-			} 
-		}
-		return null;
-
-		
-	}
-
-	@Override
-	public ArrayList<PayVO> payWayAll() {
-		
-		return payment.paylist;
-	}
-
-	
-		
-	
-
-	
-	
-}	
-	
+}
