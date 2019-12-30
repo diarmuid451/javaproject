@@ -5,9 +5,11 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Scanner;
 
+
 import vo.UserVO;
 import dao.UserDao;
 import dao.UserDaoImpl;
+import data.Database;
 import data.Session;
 
 public class UserServiceImpl implements UserService {
@@ -29,7 +31,7 @@ public class UserServiceImpl implements UserService {
  	 * @brief DaoImpl을 호출하여 값, 객채들을 반환 받는다.
  	 */
 	UserDao userDao = UserDaoImpl.getInstance();
-
+	Scanner scan = new Scanner(System.in);
 	/** 회원가입
  	 * @author 김령환
  	 * @brief 사용자에게 개인정보를 입력받아 아이디 중복체크를 하고 가입을 시킨다. 
@@ -38,7 +40,7 @@ public class UserServiceImpl implements UserService {
  	 */
 	@Override
 	public void join() {
-		Scanner scan = new Scanner(System.in);
+		
 		Date today = new Date();
 		
 		System.out.print("아이디 : ");
@@ -78,7 +80,7 @@ public class UserServiceImpl implements UserService {
 	//로그인
 	@Override
 	public void login() {
-		Scanner scan = new Scanner(System.in);
+		
 
 		System.out.print("아이디 : ");
 		String id = scan.nextLine();
@@ -100,14 +102,54 @@ public class UserServiceImpl implements UserService {
 			System.out.println("로그인 성공");
 			System.out.println(user.getUserName() + "회원님 확인되었습니다.");
 			
-			if (Session.loginUser.getUserLevel() >= 90) {
-				System.out.println("관리자님 환영합니다.");
+			if (Session.loginUser.getUserLevel() >= 90) { 
+				System.out.println("관리자임이 확인 되어 관리자 권환을 활성화 합니다.");
 			}
 		}
 	}
-	
-	
-	
 
+	@Override
+	public void info() { //회원 관리 페이지
+		System.out.println("회원 관리 페이지 입니다. 원하시는 항목을 선택해 주세요.\r\n1.회원 목록\r\n2.회원 정보 관리\r\n0.관리자 기능으로 돌아가기");
+		int sel = Integer.parseInt(scan.nextLine());
+		switch(sel){
+		case 0:
+			break;
+		case 1:	//회원 목록 출력 메서드
+			userDao.showUser();
+			info();
+			break;
+		case 2: //회원 정보 수정 메서드
+			System.out.println("회원 정보 관리 페이지 입니다. ID를 검색해 주세요.");
+			HashMap<String, String> param = new HashMap<String, String>();
+			boolean flag = false;
+			do {
+				String id = scan.nextLine();
+				param.put("ID", id);
+				UserVO user = userDao.choiceUser(param);
+				if(user == null){
+				System.out.println("없는 유저입니다.다시 검색해 주세요.");
+					
+					flag = true;
+					
+				}else{
+					System.out.println(id + " 님을 관리하는 페이지로 이동합니다.");
+					System.out.println("1.회원 정보 수정\t2.회원 삭제\r\n0.회원 관리 페이지로 돌아가기");
+					int select = Integer.parseInt(scan.nextLine());
+					if(select == 1){
+						userDao.changeUser(param);
+					}else if(select == 2){
+						userDao.deleteUser(param);
+					}
+					
+					
+				}
+			} while(flag);
+			info();
+			break;
+		default:
+			break;
+		}
+	}
 	
 }

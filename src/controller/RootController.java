@@ -77,14 +77,39 @@ public class RootController {
 					userService.join();
 					break;
 				}
+			} else if (Session.loginUser.getUserLevel() >= 90) {
+				adminPerfom(); //90레벨 이상의 회원은 관리자 정보 창으로 이동하도록 설정
 			} else if (Session.loginUser != null) {
 				movieInfo(); //  2. 영화 선택 페이지 보여주기
-			} else if (Session.loginUser.getUserLevel() >= 90) {
-				System.out.println("관리자 기능입니다.");
 			} 
 		}while(true);
 	}
 	
+	private void adminPerfom() {
+		System.out.println("관리자 기능입니다. 수행하실 기능을 선택해 주세요.\r\n1.회원 관리\r\n2.영화 관리\r\n3.상영관 관리\r\n4.영화 예매\r\n0.로그 아웃");
+		int	choice = Integer.parseInt(scan.nextLine());
+		
+			switch (choice){
+			case 0://로그아웃
+			Session.loginUser = null;
+			System.out.println("처음 화면으로 돌아갑니다.");
+			break;
+			case 1:// 회원 관리
+			userService.info();
+			adminPerfom();
+			break;
+			case 2:// 영화 관리
+			break;
+			
+			case 3://상영관 관리
+			break;
+			case 4://관리자도 영화 예매 할 수 있도록 설정
+			movieInfo();
+			break;
+		}
+	
+	}
+
 	private void movieInfo() {
 		do {
 		
@@ -180,7 +205,7 @@ public class RootController {
 	private void payMovie(Map<String, Object> param) {
 		do{
 			System.out.println("결제 방식을 선택해주세요 \n"
-					+ "1. 카드 2. 현금 3. 페이  \r\n0.이전화면으로");
+					+ "1. 카드  2. 현금  3. 페이  \r\n0.이전화면으로");
 			int payWay = Integer.parseInt(scan.nextLine());
 			
 			if (payWay == 0) {

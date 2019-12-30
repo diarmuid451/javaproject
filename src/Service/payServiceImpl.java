@@ -28,14 +28,14 @@ public class payServiceImpl implements payService {
 		int way = (int) param.get("결제방법");
 		switch (way) {
 		case 1:
-			param.replace("결제방법", "카드");
-			break;
-		case 2:
-			param.replace("결제방법", "현금");
-			break;
-		case 3:
-			param.replace("결제방법", "페이");
-			break;
+//			param.replace("결제방법", "카드");
+//			break;
+//		case 2:
+//			param.replace("결제방법", "현금");
+//			break;
+//		case 3:
+//			param.replace("결제방법", "페이");
+//			break;
 		}
 		System.out.println("입력하신 방법이 " + param.get("결제방법") + "이 맞으십니까? (Y/N)");
 		if (scan.nextLine().equalsIgnoreCase("Y")) {

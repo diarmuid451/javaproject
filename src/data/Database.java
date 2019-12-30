@@ -48,7 +48,7 @@ public class Database {
 		user2.setUserPw("1");
 		user2.setUserName("user1");
 		user2.setUserPhone("010-1234-5678");
-		user2.setUserLevel(0);			//90이상은 관리자
+		user2.setUserLevel(90);			//90이상은 관리자
 		user2.setUserPoint(1000);
 		user2.setUserDate(today);
 		userlist.add(user2);
@@ -362,7 +362,7 @@ public class Database {
 			} else if (i == 3){
 				col = 9;
 				row = 7;
-			}
+			}  
 			char RN = 'A';
 			int price = 8000;
 			int level = 1;
